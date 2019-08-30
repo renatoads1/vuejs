@@ -1707,8 +1707,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['click']
+  data: function data() {
+    return {
+      buscar: ''
+    };
+  },
+  methods: {
+    executaform: function executaform() {
+      axios.get('http://localhost/lol').then(function (r) {
+        console.log("ajax rodou");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -37065,24 +37082,61 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", { attrs: { action: "#", method: "post" } }, [
+    _c("form", { attrs: { action: "javascript:void(0)", method: "post" } }, [
       _c("input", {
         attrs: { type: "hidden", name: "_method", value: "POST" }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        attrs: { type: "hidden", name: "_token" },
-        domProps: { value: _vm.token }
       }),
       _vm._v(" "),
       _c(
         "button",
         {
           staticClass: "btn btn-success col-lg-12",
-          attrs: { onclick: "alert('ola mundo');" }
+          on: {
+            click: function($event) {
+              return _vm.executaform()
+            }
+          }
         },
         [_vm._v("botão")]
       )
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-12" }, [
+      _vm.buscar
+        ? _c("span", { staticClass: "span span-primary col-lg-12" }, [
+            _vm._v(_vm._s(_vm.buscar))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.buscar,
+            expression: "buscar"
+          }
+        ],
+        staticClass: "form form-control col-lg-10",
+        attrs: { type: "search", value: "" },
+        domProps: { value: _vm.buscar },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.buscar = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm.buscar
+        ? _c("span", { staticClass: "btn btn-primary col-lg-1" }, [
+            _vm._v("Send")
+          ])
+        : _vm._e()
     ])
   ])
 }
