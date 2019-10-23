@@ -23,3 +23,7 @@ Route::get('/lol',function(){
   $bla = ["msg"=>"rodou"];
   return $bla;
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
